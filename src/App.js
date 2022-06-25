@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { SearchCharactersContext } from './contexts/SearchCharacters'
+import { FavouriteCharactersContext } from './contexts/FavouriteCharacters'
 
 import './App.css';
 
 // components
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import FavouriteChars from './pages/FavouriteChars'
 
 function App() {
   const charactersApiUrl = 'https://rickandmortyapi.com/api/character'
@@ -17,6 +19,8 @@ function App() {
   const [nextPageUrl, setNextPageUrl] = useState()
   const [prevPageUrl, setPrevPageUrl] = useState()
   const [pages, setPages] = useState()
+  const [favourites, setFavourites] = useState(JSON.parse(localStorage.getItem("favourites")) || [])
+  const [favouriteChars, setFavouriteChars] = useState([])
 
   useEffect(() => {
     // setLoading(true)
@@ -56,6 +60,28 @@ function App() {
     fetchData();
   }, [query])
 
+
+  useEffect(() => {
+    // setLoading(true)
+    localStorage.setItem("favourites", JSON.stringify(favourites))
+    if (favourites.length > 0) {
+      const url = `${charactersApiUrl}/${favourites}`
+      const fetchData = async () => {
+        const res = await fetch(url);
+        let data = await res.json();
+        if (!Array.isArray(data)) {
+          data = [data]
+        }
+        setFavouriteChars(data)
+        setLoading(false);
+      }
+      fetchData();
+    } else {
+      setFavouriteChars([])
+    }
+  }, [favourites])
+
+
   function nextPage() {
     setCurrentPageUrl(nextPageUrl)
   }
@@ -66,18 +92,40 @@ function App() {
     setCurrentPageUrl(`${charactersApiUrl}?page=${num}&name=${query}`)
   }
 
+  function addToFavourites(charId) {
+    const charIdIsPresent = favourites.findIndex(favid => favid === charId)
+    if (charIdIsPresent < 0) {
+      setFavourites(prevIds => [...prevIds, charId])
+    }
+  }
+
+  function removeFromFavourites(charId) {
+    const index = favourites.findIndex(favid => favid === charId)
+
+    if (index >= 0) {
+      const newList = [...favourites];
+      newList.splice(index, 1)
+      setFavourites(newList)
+    }
+  }
+
+
   if (loading) return "Loading..."
 
   return (
     <div className="app">
-      <SearchCharactersContext.Provider value={{ query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home characters={characters} />} />
-          </Routes>
-        </div>
-      </SearchCharactersContext.Provider>
+      <FavouriteCharactersContext.Provider value={{ addToFavourites, favourites, removeFromFavourites }} >
+        <SearchCharactersContext.Provider value={{ query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home characters={characters} />} />
+              <Route path="Favourites" element={<FavouriteChars characters={favouriteChars} />} />
+            </Routes>
+          </div>
+        </SearchCharactersContext.Provider>
+      </FavouriteCharactersContext.Provider>
+
 
     </div>
 
