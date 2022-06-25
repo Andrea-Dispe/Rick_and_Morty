@@ -4,7 +4,7 @@ const Pagination = ({ nextPage, prevPage, goToPage, pages }) => {
   pageButtons.push(<button key={i} onClick={() => goToPage(i)}>{i}</button>)
 }
   return (
-    <div>
+    <div className="pagination">
       {prevPage && (<button onClick={prevPage}>Previous</button>)}
       {pageButtons}
       {nextPage && (<button onClick={nextPage}>Next</button>)}

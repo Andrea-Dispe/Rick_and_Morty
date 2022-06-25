@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const DialogModal = ({ isOpened, onClose, info }) => {
-
   const ref = useRef(null);
   const episodesApiUrl = 'https://rickandmortyapi.com/api/episode'
   const [loading, setLoading] = useState(true)
@@ -45,7 +44,6 @@ const DialogModal = ({ isOpened, onClose, info }) => {
 
   useEffect(() => {
     setLoading(true);
-
     const fetchMorePagesEpisodes = async () => {
       for (let i = 1; i < pages; i++) {
         const res = await fetch(`${nextPageUrl}`);
@@ -86,7 +84,6 @@ const DialogModal = ({ isOpened, onClose, info }) => {
             })}
           </ul>
         }
-
       </div>
     </dialog>
   );

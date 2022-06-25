@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { SearchCharactersContext } from './contexts/SearchCharacters'
 import { FavouriteCharactersContext } from './contexts/FavouriteCharacters'
-
-import './App.css';
-
+import { SearchCharactersContext } from './contexts/SearchCharacters'
+import './App.css'
 // components
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
+import Home from './pages/Home'
 import FavouriteChars from './pages/FavouriteChars'
+import Navbar from './components/Navbar';
 
-function App() {
+
+const App = () => {
   const charactersApiUrl = 'https://rickandmortyapi.com/api/character'
   const [loading, setLoading] = useState(true)
   const [characters, setCharacters] = useState([])
@@ -60,7 +59,6 @@ function App() {
     fetchData();
   }, [query])
 
-
   useEffect(() => {
     // setLoading(true)
     localStorage.setItem("favourites", JSON.stringify(favourites))
@@ -109,27 +107,25 @@ function App() {
     }
   }
 
-
   if (loading) return "Loading..."
 
   return (
-    <div className="app">
-      <FavouriteCharactersContext.Provider value={{ addToFavourites, favourites, removeFromFavourites }} >
-        <SearchCharactersContext.Provider value={{ query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
-          <Navbar />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Home characters={characters} />} />
-              <Route path="Favourites" element={<FavouriteChars characters={favouriteChars} />} />
-            </Routes>
-          </div>
-        </SearchCharactersContext.Provider>
-      </FavouriteCharactersContext.Provider>
+        <div className="app">
+    <FavouriteCharactersContext.Provider value={{ addToFavourites, favourites, removeFromFavourites }} >
+      <SearchCharactersContext.Provider value={{ query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
 
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home characters={characters} />} />
+            <Route path="Favourites" element={<FavouriteChars characters={favouriteChars} />} />
+          </Routes>
+        </div>
 
-    </div>
-
+      </SearchCharactersContext.Provider>
+    </FavouriteCharactersContext.Provider>
+        </div>
   );
-}
+};
 
 export default App;
