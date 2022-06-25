@@ -7,7 +7,7 @@ import { FavouriteCharactersContext } from '../contexts/FavouriteCharacters'
 
 
 const Card = ({ character, isFav = false }) => {
-  console.log('isFav: ', isFav);
+  console.log('character.name: ', character.name);
   const [hovered, setHovered] = useState(false);
   const toggleHover = () => setHovered(!hovered);
   const { addToFavourites, removeFromFavourites } = useContext(FavouriteCharactersContext);
@@ -34,7 +34,7 @@ const Card = ({ character, isFav = false }) => {
            onClick={toggleFav}
 />
       <div className="card" onClick={() => setIsOpened(true)}>
-        <div name={character.name} />
+        <div>{character.name}</div>
         <Avatar image={character.image} />
       </div>
       <DialogModal
