@@ -1,14 +1,14 @@
 import { useContext } from 'react'
-import { FavouriteCharactersContext } from '../contexts/FavouriteCharacters'
-import { SearchCharactersContext } from '../contexts/SearchCharacters'
+import { CharacterContext } from '../contexts/CharacterContext'
+import { PaginationContext } from '../contexts/PaginationContext'
 // components
 import Card from '../components/Card'
 import Pagination from '../components/Pagination'
 
 
-const Home = ({ characters }) => {
-  const { query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage } = useContext(SearchCharactersContext);
-  const { favourites } = useContext(FavouriteCharactersContext);
+const Home = () => {
+  const { nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage } = useContext(PaginationContext);
+  const { favourites, characters } = useContext(CharacterContext);
 
   const checkIfFav = (char) => {
     const isInFavourites = favourites.findIndex(fav => fav === char.id)
@@ -21,14 +21,6 @@ const Home = ({ characters }) => {
 
   return (
     <>
-      {/* <div className="search">
-        <input type="text"
-          placeholder={"Search Character"}
-          className={"input"}
-          onChange={event => setQuery(event.target.value)}
-          value={query}
-        />
-      </div> */}
       <div className="cards-wrapper">
         {characters && characters.length > 0 ?
           characters.map(char => {

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { FavouriteCharactersContext } from './contexts/FavouriteCharacters'
-import { SearchCharactersContext } from './contexts/SearchCharacters'
+import { CharacterContext } from './contexts/CharacterContext'
+import { PaginationContext } from './contexts/PaginationContext'
+import { SearchContext } from './contexts/SearchContext'
+import { DialogContext } from './contexts/DialogContext'
+
 import './App.css'
 // components
 import Home from './pages/Home'
@@ -20,6 +23,9 @@ const App = () => {
   const [pages, setPages] = useState()
   const [favourites, setFavourites] = useState(JSON.parse(localStorage.getItem("favourites")) || [])
   const [favouriteChars, setFavouriteChars] = useState([])
+  const [hovered, setHovered] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+
 
   useEffect(() => {
     // setLoading(true)
@@ -107,24 +113,39 @@ const App = () => {
     }
   }
 
+  const toggleFav = (character) => {
+    if (isFav) {
+      removeFromFavourites(character.id);
+    } else {
+      addToFavourites(character.id)
+    }
+  }
+
+  const toggleHover = () => setHovered(!hovered);
+
+
   if (loading) return "Loading..."
 
   return (
-        <div className="app">
-    <FavouriteCharactersContext.Provider value={{ addToFavourites, favourites, removeFromFavourites }} >
-      <SearchCharactersContext.Provider value={{ query, setQuery, nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
+    <div className="app">
+      <CharacterContext.Provider value={{ addToFavourites, favourites, favouriteChars, removeFromFavourites, characters }} >
+        <PaginationContext.Provider value={{ nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
+          <SearchContext.Provider value={{ query, setQuery }}>
+          <DialogContext.Provider value={{ toggleHover, toggleFav, setIsOpened, isOpened }}>
 
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home characters={characters} />} />
-            <Route path="Favourites" element={<FavouriteChars characters={favouriteChars} />} />
-          </Routes>
-        </div>
+            <Navbar />
+            <div className="container">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="Favourites" element={<FavouriteChars />} />
+              </Routes>
+            </div>
+          </DialogContext.Provider>
+          </SearchContext.Provider>
 
-      </SearchCharactersContext.Provider>
-    </FavouriteCharactersContext.Provider>
-        </div>
+        </PaginationContext.Provider>
+      </CharacterContext.Provider>
+    </div>
   );
 };
 

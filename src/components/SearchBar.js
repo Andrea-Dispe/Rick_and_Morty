@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SearchCharactersContext } from '../contexts/SearchCharacters'
+import { SearchCharactersContext } from '../contexts/SearchContext'
 import { FcSearch } from "react-icons/fc";
 
 const SearchBar = () => {

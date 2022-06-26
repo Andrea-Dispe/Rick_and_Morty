@@ -1,6 +1,11 @@
+import { useContext } from 'react'
+import { CharacterContext } from '../contexts/CharacterContext'
+
 import Card from '../components/Card'
 
-const FavouriteChars = ({characters}) => {
+
+const FavouriteChars = () => {
+  const { characters } = useContext(CharacterContext);
 
   return (
     <div className="cards-wrapper">

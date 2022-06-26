@@ -1,24 +1,16 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { BsFillStarFill } from "react-icons/bs";
-import { FavouriteCharactersContext } from '../contexts/FavouriteCharacters'
+import { CharacterContext } from '../contexts/CharacterContext'
+import { DialogContext } from '../contexts/DialogContext'
+
 // components
 import Avatar from './Avatar';
 import DialogModal from "./Dialog";
 
 
-const Card = ({ character, isFav = false }) => {
-  const [hovered, setHovered] = useState(false);
-  const toggleHover = () => setHovered(!hovered);
-  const { addToFavourites, removeFromFavourites } = useContext(FavouriteCharactersContext);
-  const [isOpened, setIsOpened] = useState(false);
+const Card = ({character,  isFav = false }) => {
+  const { toggleHover, toggleFav, setIsOpened, isOpened } = useContext(DialogContext);
 
-  const toggleFav = () => {
-    if (isFav) {
-      removeFromFavourites(character.id);
-    } else {
-      addToFavourites(character.id)
-    }
-  }
 
   return (
     <div className="card-container">
@@ -26,7 +18,7 @@ const Card = ({ character, isFav = false }) => {
         className={isFav ? 'star-active' : 'star'}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
-        onClick={toggleFav}
+        onClick={() => toggleFav(character)}
       />
       <div className="card" onClick={() => setIsOpened(true)}>
         <div>{character.name}</div>
