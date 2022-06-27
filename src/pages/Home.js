@@ -9,7 +9,7 @@ import Pagination from '../components/Pagination'
 const Home = () => {
   const { nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage } = useContext(PaginationContext);
   const { characters, checkIfFav } = useContext(CharacterContext);
-
+console.log('pages: ', pages);
   return (
     <>
       <div className="cards-wrapper">
@@ -21,12 +21,13 @@ const Home = () => {
           }) : 'There are no characters that match the query'}
 
       </div>
+      {pages > 1 ?
         <Pagination
           nextPage={nextPageUrl ? nextPage : null}
           prevPage={prevPageUrl ? prevPage : null}
           goToPage={goToPage}
           pages={pages}
-        />
+        /> : ''}
     </>
   );
 }
