@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { BsFillStarFill } from "react-icons/bs";
 import { DialogContext } from '../contexts/DialogContext'
 
@@ -8,7 +8,8 @@ import DialogModal from "./Dialog";
 
 
 const Card = ({character,  isFav = false }) => {
-  const { toggleHover, toggleFav, setIsOpened, isOpened } = useContext(DialogContext);
+  const { toggleHover, toggleFav} = useContext(DialogContext);
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
     <div className="card-container">
