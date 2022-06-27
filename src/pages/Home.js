@@ -20,13 +20,13 @@ const Home = () => {
             )
           }) : 'There are no characters that match the query'}
 
+      </div>
         <Pagination
           nextPage={nextPageUrl ? nextPage : null}
           prevPage={prevPageUrl ? prevPage : null}
           goToPage={goToPage}
           pages={pages}
         />
-      </div>
     </>
   );
 }

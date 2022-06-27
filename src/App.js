@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
 import { Routes, Route } from "react-router-dom";
 import { CharacterContext } from './contexts/CharacterContext'
 import { PaginationContext } from './contexts/PaginationContext'
@@ -25,9 +25,21 @@ const App = () => {
   const [favouriteChars, setFavouriteChars] = useState([])
   const [hovered, setHovered] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
 
 
   useEffect(() => {
+    const matches = currentPageUrl.match(/page=(\d+)/);
+    if(matches) {
+      setPageNumber(Number(matches[1]))
+    } else {
+      setPageNumber(1)
+    }
+
+    console.log('pageNumber: ', pageNumber);
+    console.log('currentPageUrl: ', currentPageUrl);
+
+
     // setLoading(true)
     const fetchData = async () => {
       const res = await fetch(currentPageUrl);
@@ -40,6 +52,7 @@ const App = () => {
     }
     fetchData();
   }, [currentPageUrl])
+
 
 
   useEffect(() => {
@@ -136,7 +149,7 @@ const App = () => {
   return (
     <div className="app">
       <CharacterContext.Provider value={{ addToFavourites, favourites, favouriteChars, removeFromFavourites, characters, checkIfFav }} >
-        <PaginationContext.Provider value={{ nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
+        <PaginationContext.Provider value={{ nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage, pageNumber }} >
           <SearchContext.Provider value={{ query, setQuery }}>
           <DialogContext.Provider value={{ toggleHover, toggleFav, setIsOpened, isOpened }}>
             <Navbar />

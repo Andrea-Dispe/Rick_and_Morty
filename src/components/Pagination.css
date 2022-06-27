@@ -1,8 +1,12 @@
 .pagination {
   padding: 70px;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination-btn {
-  font-size: 18px;
+  font-size: 25px;
   margin-right: 3px;
+  
+
 }
