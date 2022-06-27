@@ -8,16 +8,7 @@ import Pagination from '../components/Pagination'
 
 const Home = () => {
   const { nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage } = useContext(PaginationContext);
-  const { favourites, characters } = useContext(CharacterContext);
-
-  const checkIfFav = (char) => {
-    const isInFavourites = favourites.findIndex(fav => fav === char.id)
-    if (isInFavourites < 0) {
-      return false
-    } else {
-      return true
-    }
-  }
+  const { characters, checkIfFav } = useContext(CharacterContext);
 
   return (
     <>

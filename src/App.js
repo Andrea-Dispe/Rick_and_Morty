@@ -96,6 +96,14 @@ const App = () => {
     setCurrentPageUrl(`${charactersApiUrl}?page=${num}&name=${query}`)
   }
 
+  const checkIfFav = (char) => {
+    const isInFavourites = favourites.findIndex(fav => fav === char.id)
+    if (isInFavourites < 0) {
+      return false
+    } else {
+      return true
+    }
+  }
   function addToFavourites(charId) {
     const charIdIsPresent = favourites.findIndex(favid => favid === charId)
     if (charIdIsPresent < 0) {
@@ -105,7 +113,6 @@ const App = () => {
 
   function removeFromFavourites(charId) {
     const index = favourites.findIndex(favid => favid === charId)
-
     if (index >= 0) {
       const newList = [...favourites];
       newList.splice(index, 1)
@@ -113,7 +120,7 @@ const App = () => {
     }
   }
 
-  const toggleFav = (character) => {
+  const toggleFav = (character, isFav) => {
     if (isFav) {
       removeFromFavourites(character.id);
     } else {
@@ -128,11 +135,10 @@ const App = () => {
 
   return (
     <div className="app">
-      <CharacterContext.Provider value={{ addToFavourites, favourites, favouriteChars, removeFromFavourites, characters }} >
+      <CharacterContext.Provider value={{ addToFavourites, favourites, favouriteChars, removeFromFavourites, characters, checkIfFav }} >
         <PaginationContext.Provider value={{ nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage }} >
           <SearchContext.Provider value={{ query, setQuery }}>
           <DialogContext.Provider value={{ toggleHover, toggleFav, setIsOpened, isOpened }}>
-
             <Navbar />
             <div className="container">
               <Routes>

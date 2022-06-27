@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { BsFillStarFill } from "react-icons/bs";
-import { CharacterContext } from '../contexts/CharacterContext'
 import { DialogContext } from '../contexts/DialogContext'
 
 // components
@@ -11,14 +10,13 @@ import DialogModal from "./Dialog";
 const Card = ({character,  isFav = false }) => {
   const { toggleHover, toggleFav, setIsOpened, isOpened } = useContext(DialogContext);
 
-
   return (
     <div className="card-container">
       <BsFillStarFill
         className={isFav ? 'star-active' : 'star'}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
-        onClick={() => toggleFav(character)}
+        onClick={() => toggleFav(character, isFav)}
       />
       <div className="card" onClick={() => setIsOpened(true)}>
         <div>{character.name}</div>

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { SearchCharactersContext } from '../contexts/SearchContext'
+import { SearchContext } from '../contexts/SearchContext'
 import { FcSearch } from "react-icons/fc";
 
 const SearchBar = () => {
-  const { query, setQuery } = useContext(SearchCharactersContext);
+  const { query, setQuery } = useContext(SearchContext);
   return (
     <div className="search-wrapper">
       <div className="search">

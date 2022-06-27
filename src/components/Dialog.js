@@ -9,6 +9,7 @@ const DialogModal = ({ isOpened, onClose, info }) => {
   const [pages, setPages] = useState()
 
   useEffect(() => {
+    console.log('isOpened: ', isOpened);
     // open modal logic
     if (isOpened) {
       ref.current.showModal();
