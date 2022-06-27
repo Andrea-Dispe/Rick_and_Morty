@@ -1,0 +1,16 @@
+
+.avatar {
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  min-width: 125px;
+}
+
+.avatar img {
+  border-radius: 10px;
+}
+
+.avatar:hover img {
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
+  border-radius: 10px;
+}

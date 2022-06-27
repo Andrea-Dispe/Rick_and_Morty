@@ -1,0 +1,18 @@
+.dialog {
+  width: 540px;
+  border: none;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 50%);
+  min-height: 300px;
+  border-radius: 10px;
+}
+
+.close-dialog-wrapper {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.btn-close-dialog {
+  font-size: 35px;
+}

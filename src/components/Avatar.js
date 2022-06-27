@@ -1,3 +1,5 @@
+import './Avatar.css'
+
 const Avatar = ({image}) => {
   return (
     <div className="avatar">

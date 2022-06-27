@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { SearchContext } from '../contexts/SearchContext'
 import { FcSearch } from "react-icons/fc";
+import './SearchBar.css'
+
 
 const SearchBar = () => {
   const { query, setQuery } = useContext(SearchContext);

@@ -1,0 +1,41 @@
+.card {
+  max-width: 300px;
+  min-width: 125px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.card-container {
+  position: relative;
+}
+
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.cards-wrapper-favourites {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-name {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.star {
+  top: 35px;
+  right: 10px;
+  position: absolute;
+  font-size: 50px;
+}
+.star-inactive {
+  color: black;
+}
+
+.star-active {
+  color: yellow;
+}

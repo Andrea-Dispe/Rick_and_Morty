@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { RiCloseCircleLine } from "react-icons/ri";
+import './Dialog.css'
 
 const DialogModal = ({ isOpened, onClose, info }) => {
   const ref = useRef(null);
@@ -65,8 +67,8 @@ const DialogModal = ({ isOpened, onClose, info }) => {
     <dialog ref={ref} onCancel={onClose} className="dialog" onClick={onClose}>
       <div onClick={preventAutoClose}>
         <h3>{info.name}</h3>
-        <div>
-          <button onClick={onClose}>x</button>
+        <div className="close-dialog-wrapper">
+          <RiCloseCircleLine className="btn-close-dialog" onClick={onClose} />
         </div>
         <div className="card-info">
           <div>Gender: {info.gender}</div>

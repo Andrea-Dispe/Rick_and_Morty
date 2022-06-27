@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { BsFillStarFill } from "react-icons/bs";
 import { DialogContext } from '../contexts/DialogContext'
+import './Card.css'
 
 // components
 import Avatar from './Avatar';
@@ -14,13 +15,13 @@ const Card = ({character,  isFav = false }) => {
   return (
     <div className="card-container">
       <BsFillStarFill
-        className={isFav ? 'star-active' : 'star'}
+        className={isFav ? 'star star-active' : 'star star-inactive'}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
         onClick={() => toggleFav(character, isFav)}
       />
       <div className="card" onClick={() => setIsOpened(true)}>
-        <div>{character.name}</div>
+        <div className="card-name">{character.name}</div>
         <Avatar image={character.image} />
       </div>
       <DialogModal
