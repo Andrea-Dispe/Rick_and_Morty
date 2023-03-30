@@ -14,7 +14,6 @@ const Pagination = ({ nextPage, prevPage, goToPage, pages }) => {
 
   useEffect(() => {
     const unfileteredButtons = pageButtons.filter(button => {
-      console.log('button.props.dataid <= pageNumber + 3: ', button.props.dataid <= pageNumber + 2);
       return button.props.dataid > (pageNumber - 3) && button.props.dataid <= (pageNumber + 2)
     })
     setButtons(unfileteredButtons)

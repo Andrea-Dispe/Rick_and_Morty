@@ -8,12 +8,12 @@ import Avatar from './Avatar';
 import DialogModal from "./Dialog";
 
 
-const Card = ({character,  isFav = false }) => {
+const Card = ({character,  isFav = false, isFavPage = false}) => {
   const { toggleHover, toggleFav} = useContext(DialogContext);
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="card-container">
+    <div className={isFavPage ? "card-container-favourites" : "card-container"}>
       <BsFillStarFill
         className={isFav ? 'star star-active' : 'star star-inactive'}
         onMouseEnter={toggleHover}

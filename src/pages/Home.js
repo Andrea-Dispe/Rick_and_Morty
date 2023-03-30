@@ -9,7 +9,6 @@ import Pagination from '../components/Pagination'
 const Home = () => {
   const { nextPageUrl, nextPage, prevPageUrl, prevPage, pages, goToPage } = useContext(PaginationContext);
   const { characters, checkIfFav } = useContext(CharacterContext);
-console.log('pages: ', pages);
   return (
     <>
       <div className="cards-wrapper">

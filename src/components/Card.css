@@ -9,9 +9,13 @@
   position: relative;
 }
 
-.cards-wrapper {
+.cards-wrapper,
+.cards-wrapper-favourites {
   display: flex;
   flex-wrap: wrap;
+}
+
+.cards-wrapper {
   justify-content: space-around;
 }
 
@@ -19,6 +23,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.card-container-favourites {
+  margin-right: 10px;
+  position: relative;
+
+}
+
 
 .card-name {
   text-align: center;
@@ -32,6 +43,7 @@
   position: absolute;
   font-size: 50px;
 }
+
 .star-inactive {
   color: black;
 }

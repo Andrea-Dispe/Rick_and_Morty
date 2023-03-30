@@ -36,10 +36,6 @@ const App = () => {
       setPageNumber(1)
     }
 
-    console.log('pageNumber: ', pageNumber);
-    console.log('currentPageUrl: ', currentPageUrl);
-
-
     // setLoading(true)
     const fetchData = async () => {
       const res = await fetch(currentPageUrl);

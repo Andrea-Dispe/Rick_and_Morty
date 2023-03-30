@@ -24,8 +24,22 @@
   color: black;
   height: 22px;
   box-sizing: border-box;
+  /* background: red; */
+  /* border-bottom: 0px solid blue; */
+
+  transition: color 0.5s;
+}
+
+.navbar-link {
+
+}
+
+.navbar ul .navbar-link-active {
+  color: rgb(252, 49, 49);
+
 }
 
 .navbar ul a:hover {
-  border-bottom: 2px solid blue;
+  color: rgb(252, 49, 49);
+  /* border-bottom: 2px solid blue; */
 }
